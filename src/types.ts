@@ -1,5 +1,5 @@
-export type GameCategory = 'Battle Royale' | 'Clash Squad';
-export type MatchMode = 'Solo' | 'Duo' | 'Squad';
+export type GameCategory = 'Battle Royale' | 'Clash Squad' | 'Custom Room' | 'Free Fire Battle Royale' | 'Free Fire Clash Squad';
+export type MatchMode = 'Solo' | 'Duo' | 'Squad' | 'Clash Squad (4v4)' | '1v1 Custom' | '2v2 Custom';
 export type TournamentStatus = 'Upcoming' | 'Live' | 'Completed';
 
 export interface User {
@@ -10,7 +10,7 @@ export interface User {
   role: 'user' | 'admin';
   diamonds: number;
   inGameId: string;
-  phone: string;
+  phone?: string;
   totalEarnings: number; // in diamonds
   matchesPlayed: number;
   wins: number;
@@ -24,8 +24,10 @@ export interface Tournament {
   title: string;
   game: GameCategory;
   mode: MatchMode;
-  entryFee: number; // in diamonds
-  prizePool: number; // in diamonds (guaranteed platform profit structure)
+  entryFee: number; // in diamonds (0 = Free)
+  prizePool: number; // prize value
+  prizeType?: 'Diamonds' | 'INR';
+  perKillReward?: number; // diamonds or INR per kill
   startTime: string;
   status: TournamentStatus;
   map: string;
@@ -43,6 +45,7 @@ export interface Registration {
   id: string;
   userId: string;
   userName: string;
+  inGameId?: string;
   tournamentId: string;
   tournamentTitle: string;
   game: GameCategory;
@@ -51,18 +54,67 @@ export interface Registration {
   teammates?: string[];
   registeredAt: string;
   status: 'Confirmed' | 'Pending Approval' | 'Cancelled';
-  slotNumber?: number;
+  slotNumber: number; // Guaranteed fixed slot number
 }
 
 export interface Transaction {
   id: string;
   userId: string;
   userName: string;
-  type: 'Credit' | 'Debit' | 'Withdrawal';
+  type: 'Credit' | 'Debit' | 'Withdrawal' | 'Earn' | 'TournamentWin' | 'TournamentEntry';
+  category?: 'daily_checkin' | 'ad_watch' | 'task' | 'referral' | 'tournament_entry' | 'tournament_win' | 'withdrawal' | 'gift_code';
   amountDiamonds: number;
   description: string;
   timestamp: string;
   status: 'Success' | 'Pending' | 'Failed';
+  giftCode?: string;
+}
+
+export interface PlatformTask {
+  id: string;
+  title: string;
+  description: string;
+  category: 'Daily' | 'Social' | 'Gaming' | 'Video' | 'Special';
+  rewardDiamonds: number;
+  iconName?: string;
+  actionUrl?: string;
+  actionLabel?: string;
+  verificationType?: 'instant' | 'timer' | 'code';
+  timerSeconds?: number;
+  resetType?: 'lifetime' | 'weekly' | 'daily';
+  active: boolean;
+}
+
+export interface WithdrawalTier {
+  id: string;
+  title: string;
+  valueINR: number;
+  diamondsCost: number;
+  popular?: boolean;
+}
+
+export interface WithdrawalRequest {
+  id: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+  inGameId?: string;
+  diamondsCost: number;
+  giftCodeAmountINR: number;
+  giftCode?: string;
+  status: 'Pending' | 'Approved' | 'Rejected';
+  requestedAt: string;
+  processedAt?: string;
+  remarks?: string;
+}
+
+export interface EconomySettings {
+  dailyCheckinRewards: number[]; // 7 days: [5, 5, 10, 15, 20, 30, 50]
+  watchAdReward: number; // e.g. 15 diamonds
+  referralReward: number; // e.g. 50 diamonds
+  referralBonusForFriend: number; // e.g. 25 diamonds
+  dailyAdLimit: number; // e.g. 10 ads per day
+  withdrawalTiers: WithdrawalTier[];
 }
 
 export interface NotificationItem {
@@ -72,7 +124,7 @@ export interface NotificationItem {
   message: string;
   timestamp: string;
   read: boolean;
-  type: 'tournament' | 'wallet' | 'system' | 'win';
+  type: 'tournament' | 'wallet' | 'system' | 'win' | 'earn' | 'withdrawal';
 }
 
 export interface LeaderboardEntry {
@@ -92,6 +144,6 @@ export interface DiamondPackage {
   id: string;
   diamonds: number;
   bonusDiamonds: number;
-  priceDiamonds: number; // Cost in platform currency / diamonds or INR topup voucher equivalent
+  priceDiamonds: number;
   popular?: boolean;
 }

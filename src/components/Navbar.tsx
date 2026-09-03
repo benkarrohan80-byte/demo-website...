@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Trophy, Gamepad2, Coins, Crown, LayoutDashboard, User as UserIcon, Bell, LogOut, Menu, X, ShieldAlert } from 'lucide-react';
+import { Trophy, Gamepad2, Coins, Crown, LayoutDashboard, User as UserIcon, Bell, LogOut, Menu, X, ShieldAlert, Download, Youtube, ExternalLink } from 'lucide-react';
 import { User, NotificationItem } from '../types';
+import { FF_IMAGES } from '../assets/freeFireAssets';
 
 interface NavbarProps {
   activeTab: string;
@@ -37,17 +38,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center space-x-3 cursor-pointer group"
             onClick={() => setActiveTab('home')}
           >
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-red-600 to-blue-600 p-[2px] shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-[#090a0f] rounded-[10px] flex items-center justify-center">
-                <Crown className="w-6 h-6 text-purple-400 group-hover:text-red-400 transition-colors" />
-              </div>
+            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-red-600 to-blue-600 p-[2px] shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform overflow-hidden">
+              <img 
+                src={FF_IMAGES.shadowQueenLogo} 
+                alt="ShadowQueenGaming Official Logo" 
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover rounded-[9px]" 
+              />
             </div>
             <div>
               <span className="text-xl sm:text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-red-400 to-blue-400 font-sans">
                 SHADOW X
               </span>
               <span className="block text-[10px] tracking-widest text-purple-300 font-semibold uppercase">
-                ESPORTS ARENA
+                BY @SHADOWQUEENGAMING
               </span>
             </div>
           </div>
@@ -65,6 +69,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               Home
             </button>
             <button
+              onClick={() => setActiveTab('earn')}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 ${
+                activeTab === 'earn'
+                  ? 'bg-amber-600/20 text-amber-300 border border-amber-500/40 shadow-inner'
+                  : 'text-gray-300 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <span className="text-amber-400">💎</span>
+              <span>Earn Diamonds</span>
+            </button>
+            <button
               onClick={() => setActiveTab('tournaments')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 ${
                 activeTab === 'tournaments'
@@ -73,7 +88,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <Gamepad2 className="w-4 h-4 text-purple-400" />
-              <span>Tournaments</span>
+              <span>My Matches</span>
             </button>
             <button
               onClick={() => setActiveTab('wallet')}
@@ -87,29 +102,16 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Diamond Wallet</span>
             </button>
             <button
-              onClick={() => setActiveTab('leaderboard')}
+              onClick={() => setActiveTab('withdraw')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 ${
-                activeTab === 'leaderboard'
-                  ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40 shadow-inner'
+                activeTab === 'withdraw'
+                  ? 'bg-emerald-600/20 text-emerald-300 border border-emerald-500/40 shadow-inner'
                   : 'text-gray-300 hover:text-white hover:bg-white/5'
               }`}
             >
-              <Trophy className="w-4 h-4 text-yellow-400" />
-              <span>Leaderboard</span>
+              <Download className="w-4 h-4 text-emerald-400" />
+              <span>Withdraw / Play Store</span>
             </button>
-            {currentUser && (
-              <button
-                onClick={() => setActiveTab('dashboard')}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 ${
-                  activeTab === 'dashboard'
-                    ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40 shadow-inner'
-                    : 'text-gray-300 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <LayoutDashboard className="w-4 h-4 text-blue-400" />
-                <span>Dashboard</span>
-              </button>
-            )}
             {currentUser?.role === 'admin' && (
               <button
                 onClick={() => setActiveTab('admin')}
@@ -121,6 +123,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <ShieldAlert className="w-4 h-4 text-red-400" />
                 <span>Admin Portal</span>
+              </button>
+            )}
+            {currentUser && (
+              <button
+                onClick={() => setActiveTab('profile')}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 ${
+                  activeTab === 'profile'
+                    ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40 shadow-inner'
+                    : 'text-gray-300 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <UserIcon className="w-4 h-4 text-purple-400" />
+                <span>My Profile</span>
               </button>
             )}
           </nav>
@@ -208,11 +223,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                       </div>
                       <div className="p-2">
                         <button
-                          onClick={() => { setActiveTab('dashboard'); setProfileDropdownOpen(false); }}
-                          className="w-full flex items-center space-x-2 px-3 py-2 rounded-xl text-sm text-gray-300 hover:bg-purple-600/20 hover:text-white transition-colors"
+                          onClick={() => { setActiveTab('profile'); setProfileDropdownOpen(false); }}
+                          className="w-full flex items-center space-x-2 px-3 py-2.5 rounded-xl text-sm font-semibold text-purple-300 hover:bg-purple-600/30 hover:text-white transition-colors bg-purple-950/40 border border-purple-500/30 mb-1.5"
                         >
                           <UserIcon className="w-4 h-4 text-purple-400" />
                           <span>My Profile</span>
+                        </button>
+                        <button
+                          onClick={() => { setActiveTab('tournaments'); setProfileDropdownOpen(false); }}
+                          className="w-full flex items-center space-x-2 px-3 py-2 rounded-xl text-sm text-gray-300 hover:bg-purple-600/20 hover:text-white transition-colors"
+                        >
+                          <Gamepad2 className="w-4 h-4 text-purple-400" />
+                          <span>My Matches</span>
                         </button>
                         <button
                           onClick={() => { setActiveTab('wallet'); setProfileDropdownOpen(false); }}
@@ -247,6 +269,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             )}
 
+            {/* ShadowQueenGaming YouTube Quick Link */}
+            <a
+              href="https://www.youtube.com/@ShadowQueenGaming"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-red-600/20 hover:bg-red-600 border border-red-500/40 text-red-300 hover:text-white transition-all text-xs font-black uppercase tracking-wider shadow-sm"
+              title="Visit @ShadowQueenGaming on YouTube"
+            >
+              <Youtube className="w-3.5 h-3.5 text-red-400 group-hover:text-white" />
+              <span>YT Channel</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -269,11 +304,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Home</span>
           </button>
           <button
+            onClick={() => { setActiveTab('earn'); setMobileMenuOpen(false); }}
+            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium flex items-center space-x-3 ${activeTab === 'earn' ? 'bg-amber-600/20 text-amber-300 border border-amber-500/40' : 'text-gray-300 hover:bg-white/5'}`}
+          >
+            <span className="w-4 h-4 text-amber-400">💎</span>
+            <span>Earn Diamonds</span>
+          </button>
+          <button
             onClick={() => { setActiveTab('tournaments'); setMobileMenuOpen(false); }}
             className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium flex items-center space-x-3 ${activeTab === 'tournaments' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40' : 'text-gray-300 hover:bg-white/5'}`}
           >
             <Gamepad2 className="w-4 h-4 text-purple-400" />
-            <span>Tournaments</span>
+            <span>My Matches</span>
           </button>
           <button
             onClick={() => { setActiveTab('wallet'); setMobileMenuOpen(false); }}
@@ -283,21 +325,30 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Diamond Wallet</span>
           </button>
           <button
-            onClick={() => { setActiveTab('leaderboard'); setMobileMenuOpen(false); }}
-            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium flex items-center space-x-3 ${activeTab === 'leaderboard' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40' : 'text-gray-300 hover:bg-white/5'}`}
+            onClick={() => { setActiveTab('withdraw'); setMobileMenuOpen(false); }}
+            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium flex items-center space-x-3 ${activeTab === 'withdraw' ? 'bg-emerald-600/20 text-emerald-300 border border-emerald-500/40' : 'text-gray-300 hover:bg-white/5'}`}
           >
-            <Trophy className="w-4 h-4 text-yellow-400" />
-            <span>Leaderboard</span>
+            <Download className="w-4 h-4 text-emerald-400" />
+            <span>Withdraw / Play Store</span>
           </button>
-          {currentUser && (
+          {currentUser ? (
             <button
-              onClick={() => { setActiveTab('dashboard'); setMobileMenuOpen(false); }}
-              className={`w-full text-left px-4 py-3 rounded-xl text-sm font-medium flex items-center space-x-3 ${activeTab === 'dashboard' ? 'bg-purple-600/20 text-purple-300 border border-purple-500/40' : 'text-gray-300 hover:bg-white/5'}`}
+              onClick={() => { setActiveTab('profile'); setMobileMenuOpen(false); }}
+              className={`w-full text-left px-4 py-3 rounded-xl text-sm font-semibold flex items-center space-x-3 ${activeTab === 'profile' ? 'bg-purple-600/30 text-purple-300 border border-purple-500/50' : 'text-purple-300 hover:bg-purple-950/40 bg-slate-900/60 border border-purple-500/20'}`}
             >
-              <LayoutDashboard className="w-4 h-4 text-blue-400" />
-              <span>User Dashboard</span>
+              <UserIcon className="w-4 h-4 text-purple-400" />
+              <span>My Profile ({currentUser.name})</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => { onOpenAuth(); setMobileMenuOpen(false); }}
+              className="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold flex items-center space-x-3 text-purple-300 bg-purple-950/40 border border-purple-500/30 hover:bg-purple-900/40"
+            >
+              <UserIcon className="w-4 h-4 text-purple-400" />
+              <span>Login / Signup</span>
             </button>
           )}
+
           {currentUser?.role === 'admin' && (
             <button
               onClick={() => { setActiveTab('admin'); setMobileMenuOpen(false); }}
@@ -307,6 +358,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Admin Portal</span>
             </button>
           )}
+
+          <a
+            href="https://www.youtube.com/@ShadowQueenGaming"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full text-left px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between bg-red-600/20 text-red-300 border border-red-500/30 hover:bg-red-600/30 transition-colors"
+          >
+            <div className="flex items-center space-x-3">
+              <Youtube className="w-4 h-4 text-red-400" />
+              <span>@ShadowQueenGaming on YouTube</span>
+            </div>
+            <ExternalLink className="w-4 h-4 text-red-400" />
+          </a>
         </div>
       )}
     </header>

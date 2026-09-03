@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Lock, User as UserIcon, Shield, Sparkles, X, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { User } from '../types';
 import { INITIAL_USERS } from '../data/mockData';
+import { FF_IMAGES } from '../assets/freeFireAssets';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -36,11 +37,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
           id: `u_${Date.now()}`,
           name: name || email.split('@')[0],
           email: email,
-          avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=300',
+          avatar: FF_IMAGES.characterHayato,
           role: email.includes('admin') ? 'admin' : 'user',
           diamonds: 500,
           inGameId: 'SHX_' + Math.floor(100000 + Math.random() * 900000),
-          phone: '+91 98765 43210',
           totalEarnings: 0,
           matchesPlayed: 0,
           wins: 0,
@@ -73,11 +73,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onLoginSu
         id: `u_${Date.now()}`,
         name: name,
         email: email,
-        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=300',
+        avatar: FF_IMAGES.characterKelly,
         role: email.includes('admin') ? 'admin' : 'user',
         diamonds: 300, // welcome bonus diamonds
         inGameId: inGameId || 'SHX_PRO_' + Math.floor(1000 + Math.random() * 9000),
-        phone: '+91 98765 43210',
         totalEarnings: 0,
         matchesPlayed: 0,
         wins: 0,
