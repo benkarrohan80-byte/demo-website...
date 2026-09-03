@@ -160,7 +160,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   };
 
   return (
-    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 animate-fadeIn">
+    <div className="min-h-screen py-5 sm:py-8 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-5 sm:space-y-8 animate-fadeIn">
       
       {/* ======================================================== */}
       {/* 1. HERO PROFILE CARD */}

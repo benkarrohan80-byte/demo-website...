@@ -240,11 +240,11 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
     : [];
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-10 px-3 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-5 sm:space-y-8">
         
         {/* Header Banner */}
-        <div className="relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 border border-purple-500/30 p-8 rounded-3xl shadow-2xl">
+        <div className="relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 border border-purple-500/30 p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl">
           <div className="space-y-2 z-10">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-900/50 border border-purple-500/40 text-purple-300 text-xs font-bold uppercase tracking-wider">
               <Shield className="w-3.5 h-3.5 text-purple-400" />

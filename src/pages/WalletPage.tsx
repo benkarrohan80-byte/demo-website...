@@ -57,25 +57,25 @@ export const WalletPage: React.FC<WalletPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-10">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-purple-900/40 border border-purple-500/30 mb-4 backdrop-blur-md">
+          <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-purple-900/40 border border-purple-500/30 mb-3 sm:mb-4 backdrop-blur-md">
             <Coins className="w-4 h-4 text-amber-400" />
-            <span className="text-xs font-bold uppercase tracking-widest text-purple-300">Player Diamond Vault</span>
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-purple-300">Player Diamond Vault</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight uppercase">
+          <h1 className="text-2xl sm:text-5xl font-black tracking-tight uppercase">
             Diamond Wallet & Ledger
           </h1>
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-xs sm:text-sm text-gray-400 mt-2">
             Track your earned Free Fire diamonds from tasks, ads, and tournaments. Withdraw anytime directly as Google Play Redeem Codes!
           </p>
         </div>
 
         {/* Balance & Overview Card */}
-        <div className="relative bg-gradient-to-r from-purple-950/70 via-slate-900/90 to-blue-950/70 border border-purple-500/40 rounded-3xl p-8 sm:p-10 shadow-2xl overflow-hidden">
+        <div className="relative bg-gradient-to-r from-purple-950/70 via-slate-900/90 to-blue-950/70 border border-purple-500/40 rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-2xl overflow-hidden">
           <div className="absolute inset-0 z-0 pointer-events-none">
             <img 
               src={FF_IMAGES.booyahTrophy} 

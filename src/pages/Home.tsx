@@ -49,7 +49,7 @@ export const Home: React.FC<HomeProps> = ({
       </div>
 
       {/* Hero Banner with Free Fire Battle Royale Background */}
-      <section className="relative overflow-hidden pt-20 pb-32 border-b border-purple-500/20 bg-[#090a0f]">
+      <section className="relative overflow-hidden pt-8 sm:pt-20 pb-14 sm:pb-32 border-b border-purple-500/20 bg-[#090a0f]">
         
         {/* Background Image with Dark Overlay - Shadow Queen Channel Artwork */}
         <div className="absolute inset-0 z-0">
@@ -65,7 +65,7 @@ export const Home: React.FC<HomeProps> = ({
 
         {/* ShadowQueenGaming Centered Background Emblem / Watermark */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[1] select-none flex flex-col items-center justify-center">
-          <div className="relative w-72 sm:w-96 md:w-[480px] h-72 sm:h-96 md:h-[480px] rounded-full p-2 bg-gradient-to-tr from-purple-500/25 via-red-500/20 to-cyan-500/25 blur-sm">
+          <div className="relative w-52 sm:w-96 md:w-[480px] h-52 sm:h-96 md:h-[480px] rounded-full p-2 bg-gradient-to-tr from-purple-500/25 via-red-500/20 to-cyan-500/25 blur-sm">
             <img 
               src={FF_IMAGES.shadowQueenLogo} 
               alt="ShadowQueenGaming Watermark Logo" 
@@ -79,15 +79,15 @@ export const Home: React.FC<HomeProps> = ({
         </div>
 
         {/* Glowing Background Glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-purple-600/25 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute top-1/3 left-1/4 w-[350px] h-[250px] bg-red-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[200px] sm:h-[350px] bg-purple-600/25 rounded-full blur-[80px] sm:blur-[120px] pointer-events-none"></div>
+        <div className="absolute top-1/3 left-1/4 w-[200px] sm:w-[350px] h-[150px] sm:h-[250px] bg-red-600/20 rounded-full blur-[60px] sm:blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           
           {/* Community Badge */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-            <div className="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-slate-900/90 border border-pink-500/50 backdrop-blur-md shadow-xl shadow-pink-900/30">
-              <div className="relative w-6 h-6 rounded-full overflow-hidden p-[1px] bg-gradient-to-tr from-purple-500 via-pink-500 to-red-500">
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-4 sm:mb-6">
+            <div className="inline-flex items-center space-x-2 sm:space-x-3 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-slate-900/90 border border-pink-500/50 backdrop-blur-md shadow-xl shadow-pink-900/30">
+              <div className="relative w-5 h-5 sm:w-6 sm:h-6 rounded-full overflow-hidden p-[1px] bg-gradient-to-tr from-purple-500 via-pink-500 to-red-500">
                 <img 
                   src={FF_IMAGES.shadowQueenLogo} 
                   alt="ShadowQueenGaming Logo" 
@@ -95,21 +95,21 @@ export const Home: React.FC<HomeProps> = ({
                   className="w-full h-full rounded-full object-cover" 
                 />
               </div>
-              <Crown className="w-4 h-4 text-pink-400" />
-              <span className="text-xs font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-red-400">
+              <Crown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-pink-400" />
+              <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-red-400">
                 OFFICIAL SHADOW QUEEN COMMUNITY
               </span>
             </div>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-tight mb-6 drop-shadow-2xl">
+          <h1 className="text-3xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-tight mb-4 sm:mb-6 drop-shadow-2xl">
             SHADOW QUEEN'S <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400">
               REWARD ARENA
             </span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-gray-200 text-base sm:text-lg mb-10 leading-relaxed font-medium">
+          <p className="max-w-2xl mx-auto text-gray-200 text-sm sm:text-lg mb-6 sm:mb-10 leading-relaxed font-medium">
             Join Shadow Queen's custom rooms and tournaments, complete challenges, earn diamonds, and redeem exciting rewards.
           </p>
 
@@ -145,14 +145,14 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* Live & Featured Tournaments Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-10">
+      <section className="py-10 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between mb-6 sm:mb-10">
           <div>
             <div className="flex items-center space-x-2 text-red-500 font-bold text-xs uppercase tracking-widest mb-1">
               <Flame className="w-4 h-4 animate-bounce" />
               <span>Battle Ready</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-white">Featured Tournaments</h2>
+            <h2 className="text-2xl sm:text-4xl font-black text-white">Featured Tournaments</h2>
           </div>
           <button
             onClick={() => setActiveTab('tournaments')}
@@ -325,8 +325,8 @@ export const Home: React.FC<HomeProps> = ({
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+      <section className="py-10 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-3xl font-black text-white">Frequently Asked Questions</h2>
           <p className="text-xs text-purple-300 mt-2 uppercase tracking-wider">Everything you need to know about Shadow X Tournaments</p>
         </div>

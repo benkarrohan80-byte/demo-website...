@@ -299,11 +299,11 @@ export const EarnDiamondsPage: React.FC<EarnDiamondsPageProps> = ({
   const referralCode = currentUser ? `SHX-${currentUser.inGameId || currentUser.id}` : 'SHX-VIPER2026';
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-10 px-3 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-12">
         
         {/* Hero Banner: Earn Diamonds Hub */}
-        <div className="relative overflow-hidden rounded-3xl border border-purple-500/30 bg-gradient-to-r from-purple-950/80 via-slate-900 to-indigo-950/80 shadow-2xl">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-purple-500/30 bg-gradient-to-r from-purple-950/80 via-slate-900 to-indigo-950/80 shadow-2xl">
           <div className="absolute inset-0 z-0">
             <img 
               src={FF_IMAGES.dailyTaskRewards} 
@@ -314,7 +314,7 @@ export const EarnDiamondsPage: React.FC<EarnDiamondsPageProps> = ({
             <div className="absolute inset-0 bg-gradient-to-r from-[#090a0f] via-[#090a0f]/85 to-transparent"></div>
           </div>
 
-          <div className="relative z-10 p-8 sm:p-12 max-w-3xl space-y-4">
+          <div className="relative z-10 p-5 sm:p-12 max-w-3xl space-y-3 sm:space-y-4">
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-purple-500/20 border border-purple-500/40 text-purple-300 text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-4 h-4 text-amber-400 animate-spin" />
               <span>100% Free Diamonds • Zero Purchase Required</span>

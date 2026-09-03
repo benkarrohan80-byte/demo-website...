@@ -79,11 +79,11 @@ export const WithdrawPage: React.FC<WithdrawPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-10 px-3 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-12">
         
         {/* Promotional Hero Banner */}
-        <div className="relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/90 via-slate-900 to-cyan-950/90 shadow-2xl">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/90 via-slate-900 to-cyan-950/90 shadow-2xl">
           <div className="absolute inset-0 z-0 flex items-center justify-end">
             <img 
               src={FF_IMAGES.playstoreRedeemCard} 

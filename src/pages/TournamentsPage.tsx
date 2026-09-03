@@ -211,27 +211,27 @@ export const TournamentsPage: React.FC<TournamentsPageProps> = ({
     : new Map<number, Registration>();
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         
         {/* Page Header */}
-        <div className="text-center mb-10 space-y-3">
-          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-purple-900/40 border border-purple-500/30 backdrop-blur-md">
+        <div className="text-center mb-6 sm:mb-10 space-y-2 sm:space-y-3">
+          <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-1.5 rounded-full bg-purple-900/40 border border-purple-500/30 backdrop-blur-md">
             <Gamepad2 className="w-4 h-4 text-purple-400" />
-            <span className="text-xs font-bold uppercase tracking-widest text-purple-300">
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-purple-300">
               Community Custom Rooms & Daily Matches
             </span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight uppercase">
+          <h1 className="text-2xl sm:text-5xl font-black tracking-tight uppercase">
             Free Fire Custom Rooms & Matches
           </h1>
-          <p className="text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Host and join daily Free Fire custom matches. Lock your fixed slot, pay the entry fee in diamonds, and unlock verified Room ID & Password instantly.
           </p>
         </div>
 
         {/* Filters Bar */}
-        <div className="bg-slate-900/80 backdrop-blur-xl border border-purple-500/30 p-5 rounded-3xl mb-10 shadow-xl flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-slate-900/80 backdrop-blur-xl border border-purple-500/30 p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl mb-6 sm:mb-10 shadow-xl flex flex-wrap items-center justify-between gap-3 sm:gap-4">
           
           {/* Game Category */}
           <div className="flex flex-wrap items-center gap-2">

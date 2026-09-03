@@ -29,16 +29,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#090a0f]/90 backdrop-blur-xl border-b border-purple-500/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    <header className="sticky top-0 z-50 bg-[#090a0f]/95 backdrop-blur-xl border-b border-purple-500/20 max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo */}
           <div 
-            className="flex items-center space-x-3 cursor-pointer group"
+            className="flex items-center space-x-2 sm:space-x-3 cursor-pointer group min-w-0 shrink"
             onClick={() => setActiveTab('home')}
           >
-            <div className="relative w-11 h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-red-600 to-blue-600 p-[2px] shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform overflow-hidden">
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-red-600 to-blue-600 p-[2px] shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform overflow-hidden shrink-0">
               <img 
                 src={FF_IMAGES.shadowQueenLogo} 
                 alt="ShadowQueenGaming Official Logo" 
@@ -46,11 +46,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="w-full h-full object-cover rounded-[9px]" 
               />
             </div>
-            <div>
-              <span className="text-xl sm:text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-red-400 to-blue-400 font-sans">
+            <div className="min-w-0">
+              <span className="text-base sm:text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-red-400 to-blue-400 font-sans block truncate">
                 SHADOW X
               </span>
-              <span className="block text-[10px] tracking-widest text-purple-300 font-semibold uppercase">
+              <span className="block text-[8px] sm:text-[10px] tracking-widest text-purple-300 font-semibold uppercase truncate max-w-[110px] xs:max-w-[150px] sm:max-w-none">
                 BY @SHADOWQUEENGAMING
               </span>
             </div>
@@ -141,16 +141,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Right Side: Diamonds & Auth / Profile */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-1.5 sm:space-x-4 shrink-0">
             {currentUser ? (
               <>
                 {/* Diamond Balance Badge */}
                 <div 
                   onClick={() => setActiveTab('wallet')}
-                  className="flex items-center space-x-2 bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-500/40 px-3 py-1.5 rounded-full cursor-pointer hover:border-purple-400 transition-all shadow-lg"
+                  className="flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-500/40 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full cursor-pointer hover:border-purple-400 transition-all shadow-lg text-xs sm:text-sm"
                 >
-                  <span className="text-base animate-pulse">💎</span>
-                  <span className="text-sm font-bold text-cyan-300">{currentUser.diamonds.toLocaleString()}</span>
+                  <span className="text-sm sm:text-base animate-pulse">💎</span>
+                  <span className="font-bold text-cyan-300">{currentUser.diamonds.toLocaleString()}</span>
                   <span className="hidden sm:inline text-xs text-purple-300">Diamonds</span>
                 </div>
 
@@ -162,11 +162,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                       setProfileDropdownOpen(false);
                       if (!notifDropdownOpen) onMarkNotificationsRead();
                     }}
-                    className="relative p-2 rounded-xl bg-slate-900/80 border border-purple-500/20 text-gray-300 hover:text-white hover:border-purple-500/50 transition-all"
+                    className="relative p-1.5 sm:p-2 rounded-xl bg-slate-900/80 border border-purple-500/20 text-gray-300 hover:text-white hover:border-purple-500/50 transition-all"
                   >
-                    <Bell className="w-5 h-5" />
+                    <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
                     {unreadCount > 0 && (
-                      <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-600 text-white rounded-full text-xs font-bold flex items-center justify-center animate-bounce">
+                      <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-red-600 text-white rounded-full text-[10px] sm:text-xs font-bold flex items-center justify-center animate-bounce">
                         {unreadCount}
                       </span>
                     )}
@@ -174,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                   {/* Notifications Popover */}
                   {notifDropdownOpen && (
-                    <div className="absolute right-0 mt-3 w-80 sm:w-96 bg-slate-950/95 backdrop-blur-2xl border border-purple-500/30 rounded-2xl shadow-2xl overflow-hidden z-50">
+                    <div className="absolute -right-12 sm:right-0 mt-3 w-72 sm:w-96 max-w-[90vw] bg-slate-950/95 backdrop-blur-2xl border border-purple-500/30 rounded-2xl shadow-2xl overflow-hidden z-50">
                       <div className="p-4 border-b border-purple-500/20 flex items-center justify-between bg-purple-950/20">
                         <h3 className="font-bold text-white text-sm">Notifications</h3>
                         <span className="text-xs text-purple-400">{notifications.length} total</span>
