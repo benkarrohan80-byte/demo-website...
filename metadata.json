@@ -1,0 +1,7 @@
+{
+  "name": "Shadow X Tournament",
+  "description": "India's Ultimate Professional Esports Tournament Platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
