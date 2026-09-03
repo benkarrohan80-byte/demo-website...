@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#090a0f]/95 backdrop-blur-xl border-b border-purple-500/20 max-w-full overflow-hidden">
+    <header className="sticky top-0 z-50 bg-[#090a0f]/95 backdrop-blur-xl border-b border-purple-500/20 max-w-full">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
