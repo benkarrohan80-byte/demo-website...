@@ -5,6 +5,7 @@ import {
   Registration, 
   Transaction 
 } from '../types';
+import { FF_IMAGES } from '../assets/freeFireAssets';
 import { 
   User as UserIcon, 
   Shield, 
@@ -32,7 +33,6 @@ import {
   TrendingUp,
   Download
 } from 'lucide-react';
-import { FF_IMAGES } from '../assets/freeFireAssets';
 
 interface ProfilePageProps {
   currentUser: User | null;
@@ -160,8 +160,14 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   };
 
   return (
-    <div className="min-h-screen py-5 sm:py-8 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-5 sm:space-y-8 animate-fadeIn">
-      
+    <div className="min-h-screen py-5 sm:py-8 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-5 sm:space-y-8 animate-fadeIn relative overflow-hidden">
+      {/* Background Free Fire Image Wallpaper */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-15">
+        <img src={FF_IMAGES.purgatorySolo} alt="Free Fire Purgatory Wallpaper" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#090a0f]/90 via-[#090a0f]/80 to-[#090a0f]"></div>
+      </div>
+
+      <div className="relative z-10 space-y-5 sm:space-y-8">
       {/* ======================================================== */}
       {/* 1. HERO PROFILE CARD */}
       {/* ======================================================== */}
@@ -170,11 +176,12 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-        {/* Top Header Banner Pattern */}
-        <div className="h-32 sm:h-44 bg-gradient-to-r from-purple-950 via-slate-900 to-red-950 border-b border-purple-500/20 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        {/* Top Header Banner Pattern with Free Fire Artwork */}
+        <div className="h-32 sm:h-44 border-b border-purple-500/20 relative overflow-hidden">
+          <img src={FF_IMAGES.channelBanner} alt="Shadow Queen Channel Banner" className="w-full h-full object-cover opacity-60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
           
-          <div className="absolute top-4 right-4 flex items-center space-x-2">
+          <div className="absolute top-4 right-4 flex items-center space-x-2 z-10">
             <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-purple-600 text-white shadow-lg border border-purple-400">
               {currentUser.tier || 'Grandmaster'}
             </span>
@@ -829,6 +836,7 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
         </div>
       )}
 
+      </div>
     </div>
   );
 };

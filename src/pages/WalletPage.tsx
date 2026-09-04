@@ -57,8 +57,14 @@ export const WalletPage: React.FC<WalletPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-12 px-3 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Free Fire Image Wallpaper */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-15">
+        <img src={FF_IMAGES.booyahTrophy} alt="Free Fire Booyah Trophy Wallpaper" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#090a0f]/90 via-[#090a0f]/80 to-[#090a0f]"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-10 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto">

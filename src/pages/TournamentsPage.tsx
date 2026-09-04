@@ -4,6 +4,7 @@ import {
   Trophy, Gamepad2, Users, Coins, Clock, MapPin, CheckCircle2, 
   Shield, AlertCircle, ArrowRight, X, Key, Copy, Check, Lock, Unlock, Sparkles, Info
 } from 'lucide-react';
+import { FF_IMAGES } from '../assets/freeFireAssets';
 
 interface TournamentsPageProps {
   tournaments: Tournament[];
@@ -211,21 +212,28 @@ export const TournamentsPage: React.FC<TournamentsPageProps> = ({
     : new Map<number, Registration>();
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-12 px-3 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-12 px-3 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Free Fire Image Wallpaper & Glow */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-15">
+        <img src={FF_IMAGES.bermudaSquad} alt="Free Fire Background" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#090a0f]/90 via-[#090a0f]/80 to-[#090a0f]"></div>
+      </div>
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Page Header */}
         <div className="text-center mb-6 sm:mb-10 space-y-2 sm:space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-1.5 rounded-full bg-purple-900/40 border border-purple-500/30 backdrop-blur-md">
-            <Gamepad2 className="w-4 h-4 text-purple-400" />
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-purple-300">
+          <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-1.5 rounded-full bg-purple-900/60 border border-purple-500/40 backdrop-blur-md shadow-lg shadow-purple-900/30">
+            <Gamepad2 className="w-4 h-4 text-purple-400 animate-pulse" />
+            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-purple-200">
               Community Custom Rooms & Daily Matches
             </span>
           </div>
-          <h1 className="text-2xl sm:text-5xl font-black tracking-tight uppercase">
+          <h1 className="text-2xl sm:text-5xl font-black tracking-tight uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-red-300 drop-shadow-lg">
             Free Fire Custom Rooms & Matches
           </h1>
-          <p className="text-xs sm:text-sm text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-gray-300 max-w-2xl mx-auto leading-relaxed">
             Host and join daily Free Fire custom matches. Lock your fixed slot, pay the entry fee in diamonds, and unlock verified Room ID & Password instantly.
           </p>
         </div>

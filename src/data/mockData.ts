@@ -16,6 +16,7 @@ export const INITIAL_USERS: User[] = [
     kdRatio: 5.42,
     tier: 'Apex Predator',
     createdAt: '2025-11-10',
+    isVerified: true,
   },
   {
     id: 'u2',
@@ -31,6 +32,7 @@ export const INITIAL_USERS: User[] = [
     kdRatio: 9.99,
     tier: 'Immortal',
     createdAt: '2025-10-01',
+    isVerified: true,
   },
   {
     id: 'u3',

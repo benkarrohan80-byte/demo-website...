@@ -174,7 +174,7 @@ export const Home: React.FC<HomeProps> = ({
               <div
                 key={t.id}
                 onClick={() => onSelectTournament(t)}
-                className="group relative bg-slate-900/80 backdrop-blur-xl border border-purple-500/20 rounded-3xl overflow-hidden hover:border-purple-500/50 transition-all duration-300 shadow-xl hover:shadow-purple-500/10 cursor-pointer flex flex-col"
+                className="group relative bg-slate-900/80 backdrop-blur-xl border border-purple-500/20 rounded-3xl overflow-hidden hover:border-purple-500/50 transition-all duration-300 shadow-xl ff-card-glow cursor-pointer flex flex-col"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img src={t.bannerUrl} alt={t.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -323,6 +323,7 @@ export const Home: React.FC<HomeProps> = ({
           </div>
         </div>
       </section>
+
 
       {/* FAQ Section */}
       <section className="py-10 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

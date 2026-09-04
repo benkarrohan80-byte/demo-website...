@@ -17,6 +17,7 @@ export interface User {
   kdRatio: number;
   tier: 'Grandmaster' | 'Challenger' | 'Apex Predator' | 'Immortal';
   createdAt: string;
+  isVerified?: boolean;
 }
 
 export interface Tournament {

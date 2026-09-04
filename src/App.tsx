@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Tournament, Registration, Transaction, NotificationItem, PlatformTask, EconomySettings, WithdrawalTier, WithdrawalRequest } from './types';
-import { INITIAL_USERS, INITIAL_TOURNAMENTS, INITIAL_REGISTRATIONS, INITIAL_TRANSACTIONS, INITIAL_NOTIFICATIONS, INITIAL_TASKS, INITIAL_ECONOMY_SETTINGS, INITIAL_WITHDRAWAL_REQUESTS } from './data/mockData';
+import { INITIAL_TOURNAMENTS, INITIAL_REGISTRATIONS, INITIAL_TRANSACTIONS, INITIAL_NOTIFICATIONS, INITIAL_TASKS, INITIAL_ECONOMY_SETTINGS, INITIAL_WITHDRAWAL_REQUESTS } from './data/mockData';
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
 import { TournamentsPage } from './pages/TournamentsPage';
@@ -10,14 +10,18 @@ import { AuthModal } from './pages/AuthModal';
 import { WithdrawPage } from './pages/WithdrawPage';
 import { EarnDiamondsPage } from './pages/EarnDiamondsPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { FF_IMAGES } from './assets/freeFireAssets';
+import { auth, syncUserProfile, logoutFirebase } from './lib/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
-  const [currentUser, setCurrentUser] = useState<User | null>(INITIAL_USERS[0]); // default logged in as pro gamer
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authInitializing, setAuthInitializing] = useState(true);
 
-  // Database mock state
-  const [users, setUsers] = useState<User[]>(INITIAL_USERS);
+  // Database state
+  const [users, setUsers] = useState<User[]>([]);
   const [tournaments, setTournaments] = useState<Tournament[]>(INITIAL_TOURNAMENTS);
   const [registrations, setRegistrations] = useState<Registration[]>(INITIAL_REGISTRATIONS);
   const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS);
@@ -28,14 +32,45 @@ export default function App() {
   const [economySettings, setEconomySettings] = useState<EconomySettings>(INITIAL_ECONOMY_SETTINGS);
   const [withdrawalRequests, setWithdrawalRequests] = useState<WithdrawalRequest[]>(INITIAL_WITHDRAWAL_REQUESTS);
 
+  // Persistent Firebase Authentication listener
+  useEffect(() => {
+    if (!auth) {
+      setAuthInitializing(false);
+      return;
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, async (fbUser) => {
+      if (fbUser) {
+        try {
+          const userProfile = await syncUserProfile(fbUser);
+          setCurrentUser(userProfile);
+          setUsers(prev => prev.some(u => u.id === userProfile.id) ? prev : [userProfile, ...prev]);
+        } catch (e) {
+          console.error('Error syncing user profile:', e);
+        }
+      } else {
+        setCurrentUser(null);
+      }
+      setAuthInitializing(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleLoginSuccess = (user: User) => {
     setCurrentUser(user);
     if (!users.some(u => u.id === user.id)) {
       setUsers([user, ...users]);
     }
+    setAuthModalOpen(false);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await logoutFirebase();
+    } catch (e) {
+      console.error('Logout error:', e);
+    }
     setCurrentUser(null);
     setActiveTab('home');
   };
@@ -194,26 +229,6 @@ export default function App() {
     setTransactions([newTx, ...transactions]);
   };
 
-  const handleWatchAdReward = (rewardDiamonds: number) => {
-    if (!currentUser) return;
-    const updatedUser = { ...currentUser, diamonds: currentUser.diamonds + rewardDiamonds, totalEarnings: (currentUser.totalEarnings || 0) + rewardDiamonds };
-    setCurrentUser(updatedUser);
-    setUsers(users.map(u => u.id === updatedUser.id ? updatedUser : u));
-
-    const newTx: Transaction = {
-      id: `tx_${Date.now()}`,
-      userId: currentUser.id,
-      userName: currentUser.name,
-      type: 'Earn',
-      category: 'ad_watch',
-      amountDiamonds: rewardDiamonds,
-      description: `Watched Sponsor Ad Stream`,
-      timestamp: new Date().toLocaleString(),
-      status: 'Success'
-    };
-    setTransactions([newTx, ...transactions]);
-  };
-
   const handleApplyReferralCode = (code: string) => {
     if (!currentUser) return false;
     if (code.startsWith('SHX-')) {
@@ -295,7 +310,6 @@ export default function App() {
 
   const handleUpdateTournament = (updatedT: Tournament) => {
     setTournaments(tournaments.map(t => t.id === updatedT.id ? updatedT : t));
-    // If room credentials were added or changed, notify registered players
     if (updatedT.roomId) {
       const regUsers = registrations.filter(r => r.tournamentId === updatedT.id && r.status === 'Confirmed');
       regUsers.forEach(r => {
@@ -315,7 +329,6 @@ export default function App() {
 
   const handleDeleteTournament = (id: string) => {
     setTournaments(tournaments.filter(t => t.id !== id));
-    // Clean up registrations
     setRegistrations(registrations.filter(r => r.tournamentId !== id));
   };
 
@@ -386,7 +399,6 @@ export default function App() {
     setCurrentUser(updatedUser);
     setUsers(users.map(u => u.id === updatedUser.id ? updatedUser : u));
 
-    // Send confirmation notification
     const newNotif: NotificationItem = {
       id: `notif_${Date.now()}`,
       userId: currentUser.id,
@@ -399,9 +411,33 @@ export default function App() {
     setNotifications([newNotif, ...notifications]);
   };
 
+  if (authInitializing) {
+    return (
+      <div className="min-h-screen bg-[#06070a] flex flex-col items-center justify-center text-white">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center shadow-lg shadow-pink-500/30 animate-pulse mb-3">
+          <span className="text-xl">👑</span>
+        </div>
+        <p className="text-xs font-bold text-pink-300 uppercase tracking-widest">Verifying Session...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white flex flex-col font-sans selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-[#06070a] text-white flex flex-col font-sans selection:bg-purple-600 selection:text-white relative overflow-x-hidden">
       
+      {/* Global Fixed Free Fire Background Wallpaper for All Pages */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <img 
+          src={FF_IMAGES.bermudaSquad} 
+          alt="Free Fire Background Wallpaper" 
+          referrerPolicy="no-referrer" 
+          className="w-full h-full object-cover opacity-20 filter brightness-75 scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#06070a]/90 via-[#06070a]/80 to-[#06070a]"></div>
+        <div className="absolute top-0 left-1/4 w-[600px] h-[350px] bg-purple-600/15 rounded-full blur-[130px]"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[350px] bg-red-600/15 rounded-full blur-[140px]"></div>
+      </div>
+
       {/* Navbar */}
       <Navbar
         activeTab={activeTab}
@@ -414,7 +450,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1">
+      <main className="flex-1 relative z-10">
         {activeTab === 'home' && (
           <Home
             setActiveTab={setActiveTab}
@@ -506,10 +542,15 @@ export default function App() {
         )}
       </main>
 
-      {/* Auth Modal */}
+      {/* Auth Modal / Full-screen Gateway for first-time or unverified visitors */}
       <AuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
+        isOpen={!currentUser || currentUser.isVerified === false || authModalOpen}
+        unverifiedUser={currentUser && currentUser.isVerified === false ? currentUser : null}
+        onClose={() => {
+          if (currentUser && currentUser.isVerified !== false) {
+            setAuthModalOpen(false);
+          }
+        }}
         onLoginSuccess={handleLoginSuccess}
       />
 

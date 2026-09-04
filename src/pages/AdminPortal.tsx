@@ -240,8 +240,14 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({
     : [];
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-10 px-3 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-5 sm:space-y-8">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-10 px-3 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Free Fire Image Wallpaper */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-15">
+        <img src={FF_IMAGES.heroBanner} alt="Free Fire Hero Banner Wallpaper" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#090a0f]/90 via-[#090a0f]/80 to-[#090a0f]"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto space-y-5 sm:space-y-8 relative z-10">
         
         {/* Header Banner */}
         <div className="relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6 bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 border border-purple-500/30 p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl">

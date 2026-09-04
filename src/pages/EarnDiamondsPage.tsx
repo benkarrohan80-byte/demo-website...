@@ -299,8 +299,14 @@ export const EarnDiamondsPage: React.FC<EarnDiamondsPageProps> = ({
   const referralCode = currentUser ? `SHX-${currentUser.inGameId || currentUser.id}` : 'SHX-VIPER2026';
 
   return (
-    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-10 px-3 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-12">
+    <div className="min-h-screen bg-[#090a0f] text-white py-6 sm:py-10 px-3 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Free Fire Image Wallpaper */}
+      <div className="fixed inset-0 pointer-events-none z-0 opacity-15">
+        <img src={FF_IMAGES.clashSquad} alt="Free Fire Clash Squad Wallpaper" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#090a0f]/90 via-[#090a0f]/80 to-[#090a0f]"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto space-y-6 sm:space-y-12 relative z-10">
         
         {/* Hero Banner: Earn Diamonds Hub */}
         <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-purple-500/30 bg-gradient-to-r from-purple-950/80 via-slate-900 to-indigo-950/80 shadow-2xl">

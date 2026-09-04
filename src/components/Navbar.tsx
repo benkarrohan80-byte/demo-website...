@@ -38,20 +38,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center space-x-2 sm:space-x-3 cursor-pointer group min-w-0 shrink"
             onClick={() => setActiveTab('home')}
           >
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-red-600 to-blue-600 p-[2px] shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform overflow-hidden shrink-0">
-              <img 
-                src={FF_IMAGES.shadowQueenLogo} 
-                alt="ShadowQueenGaming Official Logo" 
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover rounded-[9px]" 
-              />
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-pink-600 to-rose-600 p-[2px] shadow-lg shadow-pink-500/30 group-hover:scale-105 transition-transform overflow-hidden shrink-0 flex items-center justify-center">
+              <Crown className="w-6 h-6 text-yellow-300 drop-shadow-[0_0_8px_rgba(253,224,71,0.8)]" />
             </div>
             <div className="min-w-0">
-              <span className="text-base sm:text-2xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-red-400 to-blue-400 font-sans block truncate">
-                SHADOW X
+              <span className="text-base sm:text-xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-rose-300 font-sans block truncate">
+                SHADOW QUEEN
               </span>
-              <span className="block text-[8px] sm:text-[10px] tracking-widest text-purple-300 font-semibold uppercase truncate max-w-[110px] xs:max-w-[150px] sm:max-w-none">
-                BY @SHADOWQUEENGAMING
+              <span className="block text-[8px] sm:text-[10px] tracking-widest text-pink-300 font-bold uppercase truncate max-w-[120px] xs:max-w-[160px] sm:max-w-none">
+                REWARD ARENA
               </span>
             </div>
           </div>
@@ -147,11 +142,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {/* Diamond Balance Badge */}
                 <div 
                   onClick={() => setActiveTab('wallet')}
-                  className="flex items-center space-x-1 sm:space-x-2 bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-500/40 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full cursor-pointer hover:border-purple-400 transition-all shadow-lg text-xs sm:text-sm"
+                  className="flex items-center space-x-1 sm:space-x-1.5 bg-gradient-to-r from-purple-950/60 to-blue-950/60 border border-purple-500/40 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full cursor-pointer hover:border-purple-400 transition-all shadow-lg text-xs sm:text-sm"
                 >
                   <span className="text-sm sm:text-base animate-pulse">💎</span>
                   <span className="font-bold text-cyan-300">{currentUser.diamonds.toLocaleString()}</span>
-                  <span className="hidden sm:inline text-xs text-purple-300">Diamonds</span>
                 </div>
 
                 {/* Notifications Bell */}
